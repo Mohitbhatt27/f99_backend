@@ -72,7 +72,7 @@ app.use("/api/v1", apiLimiter);
 app.use(express.json({ limit: "10kb" })); // Reject suspiciously large payloads
 
 // ── NoSQL injection sanitization ──
-app.use(mongoSanitize());
+// app.use(mongoSanitize());
 
 // ── Logging (disable in test environments) ──
 if (process.env.NODE_ENV !== "test") {
