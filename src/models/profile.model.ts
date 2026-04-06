@@ -1,5 +1,3 @@
-// src/models/profile.model.ts
-
 import mongoose, { Document, Schema } from "mongoose";
 
 export interface IProfile extends Document {
@@ -7,12 +5,12 @@ export interface IProfile extends Document {
   age?: number;
   gender?: string;
   weight?: number;
-  bodyFat?: number; // ← Add this
+  height?: number;        // ← added
+  bodyFat?: number;
   trainingExperience?: string;
   aim?: string;
   bodyMeasurements?: Record<string, any>;
   targets?: {
-    // ← Add this
     calories?: number;
     protein?: number;
     water?: number;
@@ -24,6 +22,7 @@ const profileSchema = new Schema({
   age: { type: Number },
   gender: { type: String },
   weight: { type: Number },
+  height: { type: Number },   // ← added
   bodyFat: { type: Number, default: 15 },
   trainingExperience: { type: String },
   aim: { type: String },
