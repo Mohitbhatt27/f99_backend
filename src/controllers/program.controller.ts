@@ -74,16 +74,16 @@ export const updateWeeklyProgression = async (
   try {
     const { programId } = req.body;
 
-    let program = await getProgramById(programId);
+    const program = await getProgramById(programId);
 
     if (!program) {
       res.status(404).json({ message: "Program not found" });
       return;
     }
 
-    program = adjustDifficulty(program);
+    const updatedProgram = adjustDifficulty(program);
 
-    const updated = await updateProgram(programId, program);
+    const updated = await updateProgram(programId, updatedProgram);
 
     res.json(updated);
   } catch (error) {
