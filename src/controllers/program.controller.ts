@@ -14,7 +14,7 @@ export const generateProgram = async (
   res: Response
 ): Promise<void> => {
   try {
-    const {  days, goal, location } = req.body;
+    const { days, goal, location } = req.body;
     const userId = (req as any).user?.id;
 
     if (!userId || !days) {
@@ -44,7 +44,7 @@ export const generateProgram = async (
 };
 
 
-//  Get Program
+// 📥 Get Program
 export const getProgram = async (
   req: Request,
   res: Response
