@@ -8,7 +8,7 @@ import {
 import { adjustDifficulty } from "../utils/progression.logic";
 
 
-// 🚀 Generate Program
+//  Generate Program
 export const generateProgram = async (
   req: Request,
   res: Response
@@ -43,7 +43,7 @@ export const generateProgram = async (
 };
 
 
-// 📥 Get Program
+//  Get Program
 export const getProgram = async (
   req: Request,
   res: Response
@@ -66,7 +66,7 @@ export const getProgram = async (
 };
 
 
-// 🔁 Weekly Progression Update
+//  Weekly Progression Update
 export const updateWeeklyProgression = async (
   req: Request,
   res: Response
