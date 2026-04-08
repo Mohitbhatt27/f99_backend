@@ -18,17 +18,21 @@ const auth: RequestHandler = (req, res, next) => {
 
   const token = authHeader.split(" ")[1];
 
-  // ── Check blacklist first (logged out tokens) ──
   if (isTokenBlacklisted(token)) {
-    res
-      .status(401)
-      .json({ message: "Token has been invalidated. Please log in again." });
+    res.status(401).json({
+      message: "Token has been invalidated. Please log in again."
+    });
     return;
   }
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    (req as any).user = decoded;
+    const decodedToken: any = jwt.verify(token, process.env.JWT_SECRET);
+
+    // 🔥 FIX HERE
+    (req as any).user = {
+      id: decodedToken.id || decodedToken._id
+    };
+
     next();
   } catch (err: any) {
     if (err.name === "TokenExpiredError") {
