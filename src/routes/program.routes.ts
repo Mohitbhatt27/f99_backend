@@ -1,4 +1,6 @@
 import express from "express";
+import auth from "../middlewares/auth"; 
+
 import {
   generateProgram,
   getProgram,
@@ -9,20 +11,17 @@ const router = express.Router();
 
 /**
  * @route   POST /api/program/generate
- * @desc    Generate a new workout program
  */
-router.post("/generate", generateProgram);
+router.post("/generate", auth, generateProgram); //  FIXed
 
 /**
  * @route   GET /api/program/:programId
- * @desc    Get program by ID
  */
-router.get("/:programId", getProgram);
+router.get("/:programId", auth, getProgram); // optional but recommended
 
 /**
  * @route   POST /api/program/update-week
- * @desc    Apply weekly progression (increase difficulty)
  */
-router.post("/update-week", updateWeeklyProgression);
+router.post("/update-week", auth, updateWeeklyProgression); // optional
 
 export default router;
