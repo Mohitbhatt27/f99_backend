@@ -1,5 +1,8 @@
 import { Request, Response } from "express";
 import { adjustDifficulty } from "../utils/progression.logic";
+import { Request, Response } from "express";
+import { getSplit, generateWorkouts } from "../utils/programGenerator";
+import { createProgram } from "../repositories/program.repository";
 import {
   getSplit,
   generateWorkouts
@@ -15,12 +18,16 @@ import { adjustDifficulty } from "../utils/progression.logic";
 
 
 //  Generate Program
-export const generateProgram = async (req: Request, res: Response) => {
+export const generateProgram = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   try {
     const { userId, days, goal, location } = req.body;
 
     if (!userId || !days) {
-      return res.status(400).json({ message: "Missing required fields" });
+      res.status(400).json({ message: "Missing required fields" });
+      return;
     }
 
     const split = getSplit(days);
@@ -37,10 +44,10 @@ export const generateProgram = async (req: Request, res: Response) => {
       startedAt: new Date()
     });
 
-    return res.status(201).json(program);
+    res.status(201).json(program);
   } catch (error) {
     console.error("Generate Program Error:", error);
-    return res.status(500).json({ message: "Server error" });
+    res.status(500).json({ message: "Server error" });
   }
 };
 
